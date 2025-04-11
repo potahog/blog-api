@@ -1,6 +1,5 @@
 package io.github.potahog.blog.security
 
-import io.github.potahog.blog.domain.User
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
