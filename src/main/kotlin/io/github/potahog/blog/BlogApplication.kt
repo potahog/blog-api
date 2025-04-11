@@ -1,4 +1,4 @@
-package io.github.potahog.blog_api.network
+package io.github.potahog.blog
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

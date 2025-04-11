@@ -1,7 +1,7 @@
 # Read Me First
 The following was discovered as part of building this project:
 
-* The original package name 'io.github.potahog.blog-api.network' is invalid and this project uses 'io.github.potahog.blog_api.network' instead.
+* The original package name 'io.github.potahog.blog-api.network' is invalid and this project uses 'io.github.potahog.blog' instead.
 
 # Getting Started
 

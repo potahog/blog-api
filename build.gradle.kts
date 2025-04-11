@@ -6,7 +6,7 @@ plugins {
 	kotlin("plugin.jpa") version "1.9.25"
 }
 
-group = "io.github.potahog.blog-api"
+group = "io.github.potahog.blog"
 version = "0.0.1-SNAPSHOT"
 
 java {
