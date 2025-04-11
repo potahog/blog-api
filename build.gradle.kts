@@ -30,6 +30,12 @@ dependencies {
 	// spring doc openapi
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 	// 최신버전 확인 https://central.sonatype.com/search?q=springdoc-openapi-starter-webmvc-ui&smo=true
+
+	//jwt
+	implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
