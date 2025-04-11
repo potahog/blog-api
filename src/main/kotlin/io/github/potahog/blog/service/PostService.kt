@@ -5,12 +5,14 @@ import io.github.potahog.blog.dto.PostRequest
 import io.github.potahog.blog.dto.PostResponse
 import io.github.potahog.blog.exception.NotFoundException
 import io.github.potahog.blog.repository.PostRepository
+import io.github.potahog.blog.util.getCurrentUser
 import org.springframework.stereotype.Service
 
 @Service
 class PostService (private val postRepository: PostRepository) {
     fun create(request: PostRequest): PostResponse {
-        val post = Post(title = request.title, content = request.content)
+        val currentUser = getCurrentUser()
+        val post = Post(title = request.title, content = request.content, author = currentUser)
         return postRepository.save(post).toResponse()
     }
 

@@ -9,4 +9,7 @@ data class Post(
 
     var title: String,
     var content: String,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    val author: User
 )
