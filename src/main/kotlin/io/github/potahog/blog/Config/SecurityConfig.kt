@@ -17,6 +17,7 @@ class SecurityConfig (
         http
             .csrf{ it.disable() }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
+            .formLogin{ it.disable() }
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/api/auth/**").permitAll()
