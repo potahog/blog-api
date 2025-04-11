@@ -1,5 +1,6 @@
 package io.github.potahog.blog.Config
 
+import io.github.potahog.blog.security.JwtAuthenticationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationManager
