@@ -26,6 +26,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+	// spring doc openapi
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+	// 최신버전 확인 https://central.sonatype.com/search?q=springdoc-openapi-starter-webmvc-ui&smo=true
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
