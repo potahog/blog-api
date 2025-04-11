@@ -1,0 +1,62 @@
+# IDE 설정 (예: IntelliJ, Eclipse 등)
+.idea/
+*.iml
+*.ipr
+*.iws
+*.bak
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+tmp/
+
+# 빌드 결과물
+/out/
+target/
+build/
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+gradle-app.setting
+gradle-app.iml
+
+# Maven
+log/
+logs/
+.mvn/
+*.log
+*.class
+*.war
+*.jar
+*.ear
+
+# 로컬 환경설정 파일
+*.env
+*.properties.local
+application-*.yml
+application-*.yaml
+application-*.properties
+
+# 테스트 보고서
+/test-output/
+surefire-reports/
+
+# 운영체제 별 무시 항목
+.DS_Store
+Thumbs.db
+
+# 기타
+*.swp
+*.swo
+*.tmp
+
+# 로그 파일
+*.log
+
+# 환경 설정
+.env
+*.secret
