@@ -19,7 +19,14 @@ class PostService (private val postRepository: PostRepository) {
 //        return postRepository.save(post).toResponse()
     }
 
-    fun getAll(): List<PostResponse> = postRepository.findAll().map{ it.toResponse() }
+    fun getAll(): List<PostResponse> {
+        val currentUser = getCurrentUserOrNull()
+        val posts= postRepository.findAll().filter { post ->
+            post.isPublic || (currentUser != null && post.author.id == currentUser.id)
+        }
+
+        return posts.map { it.toResponse() }
+    }
 
     fun getById(id: Long): PostResponse {
         val post = postRepository.findById(id).orElseThrow { NotFoundException("Post with id $id not found") }

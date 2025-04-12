@@ -3,7 +3,7 @@ package io.github.potahog.blog.dto
 data class PostRequest(
     val title: String,
     val content: String,
-    val isPublic: Boolean,
+    val isPublic: Boolean = true,
 )
 
 data class PostResponse(
