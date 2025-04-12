@@ -20,7 +20,11 @@ class SecurityConfig (
             .formLogin{ it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers(
+                        "/api/auth/**",
+                        "/api/posts",       // 목록
+                        "/api/posts/*"      // 단일조회
+                    ).permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(jwtAuthenticationFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter::class.java)

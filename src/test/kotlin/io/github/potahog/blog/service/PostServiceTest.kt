@@ -1,4 +1,4 @@
-package io.github.potahog.service
+package io.github.potahog.blog.service
 
 import io.github.potahog.blog.domain.Post
 import io.github.potahog.blog.domain.User
@@ -7,7 +7,9 @@ import io.github.potahog.blog.repository.PostRepository
 import io.github.potahog.blog.service.PostService
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
 import java.util.*

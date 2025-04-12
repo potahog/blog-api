@@ -1,4 +1,4 @@
-package io.github.potahog.service
+package io.github.potahog.blog.service
 
 import io.github.potahog.blog.domain.User
 import io.github.potahog.blog.dto.LoginRequest
