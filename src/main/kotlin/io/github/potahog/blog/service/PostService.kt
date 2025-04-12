@@ -6,7 +6,7 @@ import io.github.potahog.blog.dto.PostRequest
 import io.github.potahog.blog.dto.PostResponse
 import io.github.potahog.blog.exception.NotFoundException
 import io.github.potahog.blog.repository.PostRepository
-import io.github.potahog.blog.util.getCurrentUser
+import io.github.potahog.blog.util.*
 import org.springframework.stereotype.Service
 
 @Service
@@ -21,8 +21,17 @@ class PostService (private val postRepository: PostRepository) {
 
     fun getAll(): List<PostResponse> = postRepository.findAll().map{ it.toResponse() }
 
-    fun getById(id: Long): PostResponse =
-        postRepository.findById(id).orElseThrow { NotFoundException("Post with id $id not found") }.toResponse()
+    fun getById(id: Long): PostResponse {
+        val post = postRepository.findById(id).orElseThrow { NotFoundException("Post with id $id not found") }
+        val currentUser = getCurrentUserOrNull()
+
+        if(!post.isPublic && (currentUser == null || post.author.id != currentUser.id)) {
+            throw IllegalAccessException("Post is private")
+        }
+
+        return post.toResponse()
+
+    }
 
     fun update(id: Long, request: PostRequest): PostResponse {
         val post = postRepository.findById(id).orElseThrow{ NotFoundException("Cannot update: Post with id $id does not exist") }
@@ -51,10 +60,21 @@ class PostService (private val postRepository: PostRepository) {
         postRepository.delete(post)
     }
 
-    private fun Post.toResponse(): PostResponse = PostResponse(id = id, title = title, content = content)
+    private fun Post.toResponse(): PostResponse =
+        PostResponse(
+            id = id,
+            title = title,
+            content = content,
+            isPublic = isPublic
+        )
 
     fun createWithUser(request: PostRequest, user: User): PostResponse {
-        val post = Post(title = request.title, content = request.content, author = user)
+        val post = Post(
+            title = request.title,
+            content = request.content,
+            author = user,
+            isPublic = request.isPublic
+        )
         return postRepository.save(post).toResponse()
     }
 
@@ -68,5 +88,15 @@ class PostService (private val postRepository: PostRepository) {
         post.title = request.title
         post.content = request.content
         return postRepository.save(post).toResponse()
+    }
+
+    fun delete(id: Long, user: User){
+        val post = postRepository.findById(id).orElseThrow{ NotFoundException("Cannot delete: Post with id $id does not exist") }
+
+        if(post.author.id != user.id){
+            throw IllegalStateException("해당 게시글을 삭제할 권한이 없습니다.")
+        }
+
+        postRepository.delete(post)
     }
 }

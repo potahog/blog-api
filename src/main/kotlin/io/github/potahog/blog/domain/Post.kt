@@ -11,5 +11,8 @@ data class Post(
     var content: String,
 
     @ManyToOne(fetch = FetchType.LAZY)
-    val author: User
+    val author: User,
+
+    @Column(nullable = false)
+    var isPublic: Boolean = true,
 )
