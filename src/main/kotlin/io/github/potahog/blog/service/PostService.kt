@@ -94,6 +94,7 @@ class PostService (private val postRepository: PostRepository) {
 
         post.title = request.title
         post.content = request.content
+        post.isPublic = request.isPublic
         return postRepository.save(post).toResponse()
     }
 

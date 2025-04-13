@@ -15,4 +15,7 @@ data class Post(
 
     @Column(nullable = false)
     var isPublic: Boolean = true,
+
+    @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val comments: MutableList<Comment> = mutableListOf(),
 )
