@@ -16,4 +16,4 @@ data class Post (
 
     @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL], orphanRemoval = true)
     val comments: MutableList<Comment> = mutableListOf(),
-) : BaseTimeEntity()
+) : BaseEntity()

@@ -1,7 +1,6 @@
 package io.github.potahog.blog.domain
 
 import jakarta.persistence.*
-import java.util.Date
 
 @Entity
 data class Comment(
@@ -21,4 +20,4 @@ data class Comment(
 
     @OneToMany(mappedBy = "parent", cascade = [CascadeType.ALL], orphanRemoval = true)
     val children: MutableList<Comment> = mutableListOf(),
-) : BaseTimeEntity()
+) : BaseEntity()
