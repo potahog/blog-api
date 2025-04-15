@@ -1,6 +1,7 @@
 package io.github.potahog.blog.domain
 
 import jakarta.persistence.*
+import java.util.Date
 
 @Entity
 data class Comment(
@@ -15,4 +16,11 @@ data class Comment(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     val post: Post,
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id")
+    val parent: Comment? = null,
+
+    @OneToMany(mappedBy = "parent", cascade = [CascadeType.ALL], orphanRemoval = true)
+    val children: MutableList<Comment> = mutableListOf(),
 )

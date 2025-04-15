@@ -17,7 +17,16 @@ class CommentService (
         val user = getCurrentUser()
         val post = postRepository.findById(postId).orElseThrow{ IllegalArgumentException("Post not found") }
 
-        val comment = Comment(content = request.content, author = user, post = post)
+        val parent = request.parentId?.let {
+            commentRepository.findById(it).orElseThrow{ IllegalArgumentException("Parent comment not found") }
+        }
+
+        val comment = Comment(
+            content = request.content,
+            author = user,
+            post = post,
+            parent = parent,
+        )
         return commentRepository.save(comment).toResponse();
     }
 
@@ -45,9 +54,12 @@ class CommentService (
         commentRepository.delete(comment)
     }
 
-    private fun Comment.toResponse() = CommentResponse(
-        id = id,
-        content = content,
-        author = author.username,
-    )
+    private fun Comment.toResponse() : CommentResponse {
+        return CommentResponse(
+            id = id,
+            content = content,
+            author = author.username,
+            children = children.map { it.toResponse() }
+        )
+    }
 }
