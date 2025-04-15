@@ -5,8 +5,6 @@ import java.util.Date
 
 @Entity
 data class Comment(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
 
     var content: String,
 

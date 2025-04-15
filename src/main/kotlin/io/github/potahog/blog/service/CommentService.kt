@@ -7,6 +7,7 @@ import io.github.potahog.blog.repository.CommentRepository
 import io.github.potahog.blog.repository.PostRepository
 import io.github.potahog.blog.util.getCurrentUser
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
 
 @Service
 class CommentService (
@@ -52,7 +53,9 @@ class CommentService (
         
         if(comment.author.id != user.id) throw IllegalArgumentException("댓글 삭제 권한 없음")
 
-        commentRepository.delete(comment)
+//        commentRepository.delete(comment)
+        comment.deletedAt = LocalDateTime.now()
+        commentRepository.save(comment)
     }
 
     private fun Comment.toResponse() : CommentResponse {
