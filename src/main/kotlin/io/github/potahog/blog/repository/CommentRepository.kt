@@ -12,4 +12,6 @@ interface CommentRepository: JpaRepository<Comment, Long> {
     @Modifying
     @Query("DELETE FROM Comment c WHERE c.deletedAt IS NOT NULL AND c.deletedAt < :cutoff")
     fun hardDeleteOlderThan(@Param("cutoff") cutoff: LocalDateTime): Int
+    fun findByPostIdAndDeletedAtIsNull(postId: Long): List<Comment>
+    fun findByPostIdAndParentIsNullAndDeletedAtIsNull(postId: Long): List<Comment>
 }

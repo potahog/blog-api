@@ -32,7 +32,7 @@ class CommentService (
     }
 
     fun getComments(postId: Long): List<CommentResponse> {
-        return commentRepository.findByPostId(postId)
+        return commentRepository.findByPostIdAndDeletedAtIsNull(postId)
             .sortedBy { it.createdAt }
             .map{ it.toResponse() }
     }

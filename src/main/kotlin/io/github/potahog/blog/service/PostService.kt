@@ -21,7 +21,7 @@ class PostService (private val postRepository: PostRepository) {
 
     fun getAll(): List<PostResponse> {
         val currentUser = getCurrentUserOrNull()
-        val posts= postRepository.findAll().filter { post ->
+        val posts= postRepository.findAllByDeletedAtIsNull().filter { post ->
             post.isPublic || (currentUser != null && post.author.id == currentUser.id)
         }
 
@@ -29,7 +29,8 @@ class PostService (private val postRepository: PostRepository) {
     }
 
     fun getById(id: Long): PostResponse {
-        val post = postRepository.findById(id).orElseThrow { NotFoundException("Post with id $id not found") }
+        val post = postRepository.findByIdAndDeletedAtIsNull(id) ?: throw NotFoundException("Post with id $id not found")
+
         val currentUser = getCurrentUserOrNull()
 
         if(!post.isPublic && (currentUser == null || post.author.id != currentUser.id)) {
@@ -37,7 +38,17 @@ class PostService (private val postRepository: PostRepository) {
         }
 
         return post.toResponse()
+    }
 
+    fun getByAuthor(authorId: Long): List<PostResponse> {
+
+        val currentUser = getCurrentUserOrNull()
+
+        val posts = postRepository.findByAuthorIdAndDeletedAtIsNull(authorId).filter { post->
+            post.isPublic || (currentUser != null && post.author.id == currentUser.id)
+        }
+
+        return posts.map { it.toResponse() }
     }
 
     fun update(id: Long, request: PostRequest): PostResponse {
