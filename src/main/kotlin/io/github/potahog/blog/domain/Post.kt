@@ -3,7 +3,7 @@ package io.github.potahog.blog.domain
 import jakarta.persistence.*
 
 @Entity
-data class Post(
+data class Post (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
 
@@ -18,4 +18,4 @@ data class Post(
 
     @OneToMany(mappedBy = "post", cascade = [CascadeType.ALL], orphanRemoval = true)
     val comments: MutableList<Comment> = mutableListOf(),
-)
+) : BaseTimeEntity()

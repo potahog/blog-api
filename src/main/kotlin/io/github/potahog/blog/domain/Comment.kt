@@ -23,4 +23,4 @@ data class Comment(
 
     @OneToMany(mappedBy = "parent", cascade = [CascadeType.ALL], orphanRemoval = true)
     val children: MutableList<Comment> = mutableListOf(),
-)
+) : BaseTimeEntity()

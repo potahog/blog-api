@@ -32,6 +32,7 @@ class CommentService (
 
     fun getComments(postId: Long): List<CommentResponse> {
         return commentRepository.findByPostId(postId)
+            .sortedBy { it.createdAt }
             .map{ it.toResponse() }
     }
     
