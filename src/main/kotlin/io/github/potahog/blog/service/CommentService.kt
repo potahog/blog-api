@@ -28,7 +28,7 @@ class CommentService (
             post = post,
             parent = parent,
         )
-        return commentRepository.save(comment).toResponse();
+        return commentRepository.save(comment).toResponse()
     }
 
     fun getComments(postId: Long): List<CommentResponse> {
